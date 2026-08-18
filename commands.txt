@@ -1,0 +1,37 @@
+---ROBOT LAUNCH---
+ros2 launch ur_robot_driver ur_control.launch.py       ur_type:=ur5       robot_ip:='147.250.35.40'       launch_rviz:=false       non_blocking_read:=true 
+
+ros2 control switch_controllers --activate forward_position_controller
+
+ros2 control switch_controllers --activate scaled_joint_trajectory_controller
+
+---DOCKER CAMERA---
+bash ~/PIE/run_container
+
+*Three Cameras
+ros2 launch zed_multi_camera zed_multi_camera.launch.py cam_names:='[zed_right,zed_left, zed_robot]' cam_models:='[zedm,zedm,zedm]' cam_serials:='[14895613, 16343130,10028414]'
+
+*Two Cameras
+ros2 launch zed_multi_camera zed_multi_camera.launch.py cam_names:='[zed_fixed,zed_robot]' cam_models:='[zedm,zedm]' cam_serials:='[14895613, 16343130]'
+
+*One Camera
+ros2 launch zed_wrapper zed_camera.launch.py camera_model:=zedm  
+
+*Opening a new docker terminal 
+sudo docker exec -it zed_camera bash
+
+---MOVEIT---
+ros2 launch ur_moveit_config ur_moveit.launch.py ur_type:=ur5 launch_rviz:=true
+
+---DOCKER RTX4090---
+
+ssh truong_mycontainer_outside
+-my_password
+-proxy
+-zji
+
+do the same in vscode to code
+
+---BASH SETTINGS---
+nano ~/.bashrc
+source ~/.bashrc

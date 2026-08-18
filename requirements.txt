@@ -1,0 +1,21 @@
+# OpenCV dependency for physical image writing to disk
+opencv-python
+
+# ROS 2 Python client libraries (Usually provided by the system's ROS 2 environment)
+# rclpy
+# message_filters
+# cv_bridge
+
+numpy<2.0
+
+matplotlib
+torch 
+torchvision 
+tensorboard 
+tqdm 
+pillow
+typeguard
+
+# Mouse and keyboard input handling
+pynput
+evdev
